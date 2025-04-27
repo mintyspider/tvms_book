@@ -1,0 +1,89 @@
+\documentclass[../Main.tex]{subfiles}
+\begin{document}
+\chapter{Ковариация}
+
+\section{Определение}
+Появляется, когда случайные величины зависимы, и выражает степень зависимости между ними.
+
+\defn{Ковариация}{
+\(cov(\xi, \eta) = \mathbb{M}[(\xi - \mathbb{M}_\xi)(\eta - \mathbb{M}_\eta)]\)
+}
+
+\subsection{Для практики}
+\(
+cov(\xi, \eta) = \mathbb{M}[\xi, \eta] - \mathbb{M}_\xi \mathbb{M}_\eta - \mathbb{M}_\xi \mathbb{M}_\eta + \mathbb{M}_\xi \mathbb{M}_\eta = \mathbb{M}[\xi, \eta] - \mathbb{M}_\xi \mathbb{M}_\eta
+\)
+
+\section{Некоррелированность}
+
+\fact{Если случайные величины независимы, то их ковариация равна 0. Но нулевая ковариация не означает независимость случайных величин}
+
+\fact{Для зависимых \(\xi, \eta\) выполняется следующее:
+\[\mathbb{D}[\xi + \eta] = \mathbb{D}_\xi + \mathbb{D}_\eta + 2cov(\xi, \eta)\]}
+
+\defn{Некорреллированность}{
+Случайные величины, ковариация которых равно 0, называются некоррелированными. Из независимости следует некоррелированность, но из некоррелированности не следует независимость.
+}
+
+\subsection{Доказательство}
+
+Пусть \(\alpha: \{0, \frac{\pi}{2}, \pi\}\) --- равномерно распределённая случайная величина, принимающая значения с равной вероятностью \(\frac{1}{3}\). Определим случайные величины \(\xi = \sin(\alpha)\) и \(\eta = \cos(\alpha)\), которые также равномерно распределены.
+
+Значения случайных величин \(\xi\) и \(\eta\) для каждого \(\alpha\) приведены в таблице:
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \(\alpha\) & \(\xi\) & \(\eta\) & \(\mathbb{P}\) \\ 
+        \hline
+        0 & 0 & 1 & \(\frac{1}{3}\) \\ 
+        \hline
+        \(\frac{\pi}{2}\) & 1 & 0 & \(\frac{1}{3}\) \\  
+        \hline
+        \(\pi\) & 0 & -1 & \(\frac{1}{3}\) \\ 
+        \hline
+    \end{tabular}
+\end{center}
+
+Известно, что \(\xi\) и \(\eta\) связаны основным тригонометрическим тождеством: \(\xi^2 + \eta^2 = \sin^2(\alpha) + \cos^2(\alpha) = 1\).
+
+Вычислим ковариацию случайных величин \(\xi\) и \(\eta\):
+
+\[
+\text{cov}(\xi, \eta) = \mathbb{M}[\xi \eta] - \mathbb{M}[\xi] \cdot \mathbb{M}[\eta].
+\]
+
+\(\mathbb{M}[\xi]\):
+\[
+\mathbb{M}[\xi] = \sum \xi_i \cdot \mathbb{P}(\alpha_i) = 0 \cdot \frac{1}{3} + 1 \cdot \frac{1}{3} + 0 \cdot \frac{1}{3} = 0 + \frac{1}{3} + 0 = \frac{1}{3}.
+\]
+
+\(\mathbb{E}[\eta]\):
+\[
+\mathbb{M}[\eta] = \sum \eta_i \cdot \mathbb{P}(\alpha_i) = 1 \cdot \frac{1}{3} + 0 \cdot \frac{1}{3} + (-1) \cdot \frac{1}{3} = \frac{1}{3} + 0 - \frac{1}{3} = 0.
+\]
+
+\(\mathbb{M}[\xi \eta]\):
+\[
+\xi \eta =
+\begin{cases} 
+0 \cdot 1 = 0, & \text{если } \alpha = 0, \\
+1 \cdot 0 = 0, & \text{если } \alpha = \frac{\pi}{2}, \\
+0 \cdot (-1) = 0, & \text{если } \alpha = \pi.
+\end{cases}
+\]
+\[
+\mathbb{M}[\xi \eta] = \sum (\xi_i \eta_i) \cdot \mathbb{P}(\alpha_i) = 0 \cdot \frac{1}{3} + 0 \cdot \frac{1}{3} + 0 \cdot \frac{1}{3} = 0.
+\]
+\[
+cov(\xi, \eta) = \mathbb{M}[\xi \eta] - \mathbb{M}[\xi] \cdot \mathbb{M}[\eta] = 0 - \frac{1}{3} \cdot 0 = 0.
+\]
+
+Таким образом, ковариация равна:
+\[
+\text{cov}(\xi, \eta) = 0.
+\]
+
+\rmk{Несмотря на то, что \(\xi\) и \(\eta\) связаны тождеством \(\xi^2 + \eta^2 = 1\), их ковариация равна нулю, что указывает на отсутствие линейной зависимости. Однако это не означает, что \(\xi\) и \(\eta\) независимы, так как они зависимы стохастически и функционально.}
+
+\end{document}

@@ -1,0 +1,86 @@
+\documentclass[A4,12pt,oneside]{book}
+\usepackage{amd}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{footnote}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+% %--------------------------------------------------------------------------
+% %         General Setting
+% %--------------------------------------------------------------------------
+
+\graphicspath{{Images/}{../Images/}} %Path of figures
+\setkeys{Gin}{width=0.85\textwidth} %Size of figures
+\setlength{\cftbeforechapskip}{3pt} %space between items in toc
+\setlength{\parindent}{0.5cm} % Idk
+\input{theorems.tex} % Theorems styles and colors
+\usepackage[russian]{babel} %Language
+
+\setlist[itemize]{itemsep=5pt} % Adjust the length as needed
+\setlist[enumerate]{itemsep=5pt} % Adjust the length as needed
+
+
+
+% \usepackage{lmodern} %  Latin Modern font
+% \usepackage{newtxtext,newtxmath}
+
+
+
+
+% %--------------------------------------------------------------------------
+% %         General Informations
+% %--------------------------------------------------------------------------
+\newcommand{\BigTitle}{
+    Конспекты для студентов направления ИСИТ
+    }
+
+\newcommand{\LittleTitle}{
+    Теория вероятностей и математическая статистика
+}
+
+    
+\begin{document}
+
+% %--------------------------------------------------------------------------
+% %         First pages 
+% %--------------------------------------------------------------------------
+\newgeometry{top=8cm,bottom=.5in,left=2cm,right=2cm}
+\subfile{files/0.0.0.titlepage}
+\restoregeometry
+\subfile{files/0.Preface}
+\subfile{files/0.zommaire}
+
+% %--------------------------------------------------------------------------
+% %         Core of the document 
+% %--------------------------------------------------------------------------
+\part*{Первый семестр}
+% --- %
+\part{Классическая вероятность}
+\subfile{files/1semester/0}
+\subfile{files/1semester/1}
+\subfile{files/1semester/2}
+\subfile{files/1semester/3}
+\subfile{files/1semester/4}
+\part{Случайные величины, их свойства и характеристики}
+\subfile{files/1semester/5}
+\subfile{files/1semester/6}
+\subfile{files/1semester/7}
+\subfile{files/1semester/8}
+\subfile{files/1semester/9}
+\subfile{files/1semester/10}
+\subfile{files/1semester/11}
+
+% \part*{Второй семестр}
+% --- %
+
+
+
+
+
+% %--------------------------------------------------------------------------
+% %         Bibliographie 
+% %--------------------------------------------------------------------------
+\nocite{*} % to cite evey things, else cite each on using : \cite{ifrs17}. 
+\printbibliography %to print bibliographie
+
+\end{document}

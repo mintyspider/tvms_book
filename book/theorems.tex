@@ -1,0 +1,431 @@
+% Theorem System
+% The following boxes are provided:
+%   Определение:     \defn 
+%   Предупреждение: \asum
+%   Теорема:        \thm 
+%   Лемма:          \lem
+%   Следствие:      \cor
+%   Свойство:    \prop   
+%   Требование:          \clm
+%   Утверждение:           \fact
+%   Пример:        \ex
+%   Замечание:         \rmk (sentence), \rmkb (block)
+% Suffix
+%   r:              Allow Theorem/Definition to be referenced, e.g. thmr
+%   p:              Add a short proof block for Lemma, Corollary, Proposition or Claim, e.g. lemp
+%                   For theorems, use \pf for proof blocks
+
+% ======= Real examples : 
+
+% \defn{Definition Name}{
+%     A defintion.
+% }
+
+% \asum{Assumption Name}{
+%     An assumption.
+% }
+
+% \thmr{Theorem Name}{mybigthm}{
+%     A theorem.
+% }
+
+% \lem{Lemma Name}{
+%     A lemma.
+% }
+
+% \fact{
+%     A fact.
+% }
+
+% \cor{
+%     A corollary.
+% }
+
+% \prop{
+%     A proposition.
+% }
+
+% \pf{
+%    proof.
+% }
+
+% \exm{
+%     some examples. 
+% }
+
+% \rmk{
+%     Some remark.
+% }
+
+% \rmkb{
+%     Some more remark.
+% }
+
+\usepackage{xcolor}
+
+% Синие и голубые оттенки
+\definecolor{defscol}{RGB}{41, 128, 185}   % Определение (темно-синий)
+\definecolor{asumscol}{RGB}{135, 206, 250} % Предположение (светло-голубой)
+\definecolor{rmkscol}{RGB}{75, 118, 255}   % Замечание (насыщенный синий)
+
+% Голубые оттенки
+\definecolor{exmscol}{RGB}{64, 224, 208}   % Пример (светло-голубой)
+\definecolor{lemscol}{RGB}{39, 78, 192}    % Лемма (темно-синий)
+
+% Темно-синие оттенки
+\definecolor{thmscol}{RGB}{34, 67, 182}    % Теорема (очень темно-синий)
+\definecolor{prpscol}{RGB}{113, 158, 209}  % Свойство (умеренно синий)
+
+% Светлые голубые оттенки
+\definecolor{corscol}{RGB}{167, 218, 239}  % Следствие (светло-голубой)
+\definecolor{clmscol}{RGB}{84, 136, 203}   % Требование (умеренно темно-синий)
+
+% Нейтральный оттенок
+\definecolor{facscol}{RGB}{124, 166, 199}  % Утверждение (серо-голубой)
+
+% ============================
+% Определение
+% ============================
+\newtcbtheorem[number within=section]{mydefinition}{Определение}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=defscol!40!white,
+    colback=defscol!20!white,
+}{defn}
+
+\NewDocumentCommand{\defn}{m+m}{
+    \begin{mydefinition}{#1}{}
+        #2
+    \end{mydefinition}
+}
+
+\NewDocumentCommand{\defnr}{mm+m}{
+    \begin{mydefinition}{#1}{#2}
+        #3
+    \end{mydefinition}
+}
+
+% ============================
+% Предупреждение
+% ============================
+\newtcbtheorem[use counter from=mydefinition]{myassumption}{Предупреждение}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=asumscol!40!white,
+    colback=asumscol!20!white,
+}{asum}
+
+\NewDocumentCommand{\asum}{m+m}{
+    \begin{myassumption}{#1}{}
+        #2
+    \end{myassumption}
+}
+
+\NewDocumentCommand{\asumr}{mm+m}{
+    \begin{myassumption}{#1}{#2}
+        #3
+    \end{myassumption}
+}
+
+% ============================
+% Теорема
+% ============================
+
+\newtcbtheorem[use counter from=mydefinition]{mytheorem}{Теорема}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=thmscol!40!white,
+    colback=thmscol!20!white,
+}{thm}
+
+\NewDocumentCommand{\thm}{m+m}{
+    \begin{mytheorem}{#1}{}
+        #2
+    \end{mytheorem}
+}
+
+\NewDocumentCommand{\thmr}{mm+m}{
+    \begin{mytheorem}{#1}{#2}
+        #3
+    \end{mytheorem}
+}
+
+\newenvironment{thmpf}{
+	{\noindent{\it \textbf{Доказательство:}}}
+	\tcolorbox[blanker,breakable,left=5mm,parbox=false,
+    before upper={\parindent15pt},
+    after skip=10pt,
+	borderline west={1mm}{0pt}{thmscol!40!white}]
+}{
+    \textcolor{thmscol!40!white}{\hbox{}\nobreak\hfill$\blacksquare$} 
+    \endtcolorbox
+}
+
+\NewDocumentCommand{\thmp}{m+m+m}{
+    \begin{mytheorem}{#1}{}
+        #2
+    \end{mytheorem}
+
+    \begin{thmpf}
+        #3
+    \end{thmpf}
+}
+
+% ============================
+% Лемма
+% ============================
+
+\newtcbtheorem[use counter from=mydefinition]{mylemma}{Лемма}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=lemscol!40!white,
+    colback=lemscol!20!white,
+}{lem}
+
+\NewDocumentCommand{\lem}{m+m}{
+    \begin{mylemma}{#1}{}
+        #2
+    \end{mylemma}
+}
+
+\newenvironment{lempf}{
+	{\noindent{\it \textbf{Доказательство:}}}
+	\tcolorbox[blanker,breakable,left=5mm,parbox=false,
+    before upper={\parindent15pt},
+    after skip=10pt,
+	borderline west={1mm}{0pt}{lemscol!40!white}]
+}{
+    \textcolor{lemscol!40!white}{\hbox{}\nobreak\hfill$\blacksquare$} 
+    \endtcolorbox
+}
+
+\NewDocumentCommand{\lemp}{m+m+m}{
+    \begin{mylemma}{#1}{}
+        #2
+    \end{mylemma}
+
+    \begin{lempf}
+        #3
+    \end{lempf}
+}
+
+% ============================
+% Следствие
+% ============================
+
+\newtcbtheorem[use counter from=mydefinition]{mycorollary}{Следствие}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=corscol!40!white,
+    colback=corscol!20!white,
+}{cor}
+
+\NewDocumentCommand{\cor}{+m+m}{
+    \begin{mycorollary}{#1}{}
+        #2
+    \end{mycorollary}
+}
+
+\newenvironment{corpf}{
+	{\noindent{\it \textbf{Доказательство:}}}
+	\tcolorbox[blanker,breakable,left=5mm,parbox=false,
+    before upper={\parindent15pt},
+    after skip=10pt,
+	borderline west={1mm}{0pt}{corscol!40!white}]
+}{
+    \textcolor{corscol!40!white}{\hbox{}\nobreak\hfill$\blacksquare$} 
+    \endtcolorbox
+}
+
+\NewDocumentCommand{\corp}{+m+m+m}{
+    \begin{mycorollary}{#1}{}
+        #2
+    \end{mycorollary}
+
+    \begin{corpf}
+        #3
+    \end{corpf}
+}
+
+% ============================
+% Свойства
+% ============================
+
+\newtcbtheorem[use counter from=mydefinition]{myproposition}{Свойства}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=prpscol!40!white,
+    colback=prpscol!20!white,
+}{prop}
+
+\NewDocumentCommand{\prop}{+m+m}{
+    \begin{myproposition}{#1}{}
+        #2
+    \end{myproposition}
+}
+
+\newenvironment{proppf}{
+	{\noindent{\it \textbf{Доказательство:}}}
+	\tcolorbox[blanker,breakable,left=5mm,parbox=false,
+    before upper={\parindent15pt},
+    after skip=10pt,
+	borderline west={1mm}{0pt}{prpscol!40!white}]
+}{
+    \textcolor{prpscol!40!white}{\hbox{}\nobreak\hfill$\blacksquare$} 
+    \endtcolorbox
+}
+
+
+
+\NewDocumentCommand{\propp}{+m+m+m}{
+    \begin{myproposition}{#1}{}
+        #2
+    \end{myproposition}
+    \begin{proppf}
+        #3
+    \end{proppf}
+}
+
+% ============================
+% Требование
+% ============================
+
+\newtcbtheorem[use counter from=mydefinition]{myclaim}{Требование}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=clmscol!40!white,
+    colback=clmscol!20!white,
+}{clm}
+
+\NewDocumentCommand{\clm}{m+m}{
+    \begin{myclaim*}{#1}{}
+        #2
+    \end{myclaim*}
+}
+
+\NewDocumentCommand{\clmp}{m+m+m}{
+    \begin{myclaim*}{#1}{}
+        #2
+    \end{myclaim*}
+
+    \begin{clmpf}
+        #3
+    \end{clmpf}
+}
+
+% ============================
+% Утверждение
+% ============================
+
+\newtcbtheorem[use counter from=mydefinition]{myfact}{Утверждение}
+{
+    enhanced,
+    frame hidden,
+    titlerule=0mm,
+    toptitle=1mm,
+    bottomtitle=1mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=facscol!40!white,
+    colback=facscol!20!white,
+}{fact}
+
+\NewDocumentCommand{\fact}{+m}{
+    \begin{myfact}{}{}
+        #1
+    \end{myfact}
+}
+
+% ============================
+% Пример
+% ============================
+
+
+\newenvironment{myexample}{
+    \tcolorbox[blanker,breakable,left=5mm,parbox=false,
+    before upper={\parindent15pt},
+    after skip=10pt,
+	borderline west={1mm}{0pt}{clmscol!40!white}]
+}{
+    \textcolor{clmscol!40!white}{\hbox{}\nobreak\hfill$\blacksquare$} 
+    \endtcolorbox
+}
+
+\NewDocumentCommand{\exm}{m+m}{
+    \begin{myexample}
+	{\noindent{\it \textbf{Пример #1: }}}\\ 
+        #2
+    \end{myexample}
+}
+
+
+% ============================
+% Замечание
+% ============================
+
+
+\NewDocumentCommand{\rmk}{+m}{
+    {\it \color{rmkscol!80!white}#1}
+}
+
+\newenvironment{remark}{
+    \par
+    \vspace{5pt}
+    \begin{minipage}{\textwidth}
+        {\par\noindent{\textbf{Замечание}}}
+        \tcolorbox[blanker,breakable,left=5mm,
+        before skip=10pt,after skip=10pt,
+        borderline west={1mm}{0pt}{rmkscol!20!white}]
+}{
+        \endtcolorbox
+    \end{minipage}
+    \vspace{5pt}
+}
+
+\NewDocumentCommand{\rmkb}{+m}{
+    \begin{remark}
+        #1
+    \end{remark}
+}

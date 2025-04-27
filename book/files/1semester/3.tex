@@ -1,0 +1,132 @@
+\documentclass[../Main.tex]{subfiles}
+
+\begin{document}
+\chapter{Условная вероятность}
+
+Пусть задано вероятностное пространство - триада: множество элементарных исходов, построенная на нем сигма-алгебра и заданная на ней вероятностная мера. Записывается это так: \((\Omega, \ \mathfrak{A}, \ P)\).
+
+Случайное событие - элемент сигма-алгебры.
+
+\section{Определение условной вероятности}
+
+\(P(A), P(B) > 0\)
+
+\[P(A/_B) = \dfrac{P(A \cdot B)}{P(B)}\]
+
+\fact{
+Таким образом введенная вероятностная мера удовлетворяет всем свойствам вероятностного пространства.
+}
+
+\rmkb{
+\(P(A/_B)\ -\) условная вероятность.
+
+\(P(A) \ -\) безусловная вероятность. Она является частным случаем условной вероятности.
+}\pf{
+] \(B = \Omega, \ A = A/_\Omega\)
+
+\(P(A) = P(A/_\Omega) = \dfrac{P(A \cdot \Omega)}{P(\Omega)} = P(A)\)
+}
+
+\section{Свойства условной вероятности:}
+\begin{enumerate}
+    \item \(0 \leq P(A/_B) \leq 1\)
+    \pf{
+    \(AB \subset B \Rightarrow P(A \cdot B) \leq P(B).\) 
+    
+    \(\dfrac{P(B)}{P(B)} = 1\), если пересечение \(A \bigcap B = B\) или
+    \(\dfrac{P(\O)}{P(B)} = 0\), если \(A \bigcap B = \O\).
+    }
+    \item Рассмотрим события A, B, C, где \(P(B) > 0, \ A \subset C\), то есть A содержится в C.
+    Тогда \(P(A/_B) \leq P(C/_B)\).
+    \pf{
+    \(A \subset C \Rightarrow AB \subset CB \Rightarrow P(AB) \leq P(CB)\) (из свойства 2). По определению \(\dfrac{P(AB)}{P(B)} \leq \dfrac{P(CB)}{P(B)}\).
+    }
+    \item Вероятность достоверного события \(P(\Omega) = 1\).
+    \pf{
+    \(P(\Omega/_B) = \dfrac{P(\Omega B)}{P(B)} = \dfrac{P(B)}{P(B)} = 1\).
+    }
+    \item Вероятность невозможного события \(P(\O) = 0\).
+    \pf{
+    \(P(\O/_B) = \dfrac{P(\O B)}{P(B)} = \dfrac{P(\O)}{P(B)} = 0\).
+    }
+    \item ] A, C - несовместные события, тогда \(P((A+C)/_B) = P(A/_B) + P(C/_B)\).
+    \pf{
+    По определению \(P((A+C)/_B) = \dfrac{P((A+C)B)}{P(B)} = \dfrac{P(AB+CB)}{P(B)} = \dfrac{P(AB)+P(CB)}{P(B)} = \dfrac{P(AB)}{P(B)} + \dfrac{P(CB)}{P(B)} = P(A/_B)+P(C/_B)\).
+
+    Так как события несовместны, то вероятность их суммы равно сумме вероятностей.
+    }
+    \rmkb{
+    Нельзя складывать условные и безусловные события, поэтому запись \(P(A+C/_B)\) тоже допустима.
+    }
+    \item ] A, C - совместные события, тогда \(P((A+C)/_B) = P(A/_B) + P(C/_B) - P(AC/_B)\)
+    \pf{ По определению
+        
+        \(P((A+C)/_B) = \dfrac{P((A+C-AC)B)}{P(B)} = \dfrac{P(AB+CB-ACB)}{P(B)} = \dfrac{P(AB)+P(CB)-P(ACB)}{P(B)} = \dfrac{P(AB)}{P(B)} + \dfrac{P(CB)}{P(B)} - \dfrac{P(ACB)}{P(B)} = P(A/_B)+P(C/_B) - P(AC/_B)\).
+    }
+    \item Вероятность противоположного события \(P(\overline{A}/_B) = 1 - P(A/_B)\)
+    \pf{
+        \(\Omega=A+\overline{A}\), они несовместны, значит, \(P(\Omega /_B) = P((A + \overline{A})/_B) = P(A/_B) + P(\overline{A}/_B) \Rightarrow P(\overline{A}/_B) = P(\Omega/_B) - P(A/_B)\)
+    }
+    \item Аксиома полноты: ] B не обязательно в \(\mathfrak{A}\), \( A \in \mathfrak{A}, P(A/_B)=0 \Rightarrow \forall \ C \subset A \ \exists \ P(C/_B) =0 \), то есть условная вероятность любого подмножества множества нулевой меры равна 0.
+
+    \item Аксиома счетной аддитивности: ] \(\exists \{A_i\}, i \in I, A_i \in \mathfrak{A}. \forall i \neq j: A_jA_i=\O: P(\underset{i \in I}{\sum}A_i/_B) = \underset{i \in I}{\sum}P(A_i/_B)\).
+    \pf{ По индукции:
+
+    n = 2: I = \{1, 2\}. По 5^\circ \(P((A_1+A_2)/_B) = P(A_1/_B) + P(A_2/_B)\)
+
+    n = k: \(P(\underset{i = 1}{\overset{k}{\sum}}A_i/_B) = \underset{i = 1}{\overset{k}{\sum}}P(A_i/_B)\).
+
+    n = k+1: ] \(C = \underset{i = 1}{\overset{k}{\sum}}A_i \Rightarrow P(\underset{i = 1}{\overset{k+1}{\sum}}A_i/_B) = P((C + A_{k+1})/_B)\). Эти события несовместны, тогда по 5^\circ \(= P(C/_B) + P(A_{k+1}/_B) = \underset{i = 1}{\overset{k}{\sum}}P(A_i/_B) + P(A_{k+1}/_B)\).  \Rightarrow \(\underset{i = 1}{\overset{k}{\sum}}P(A_i/_B) + P(A_{k+1}/_B) = \underset{i = 1}{\overset{k+1}{\sum}}P(A_i/_B)\).
+    В силу индукционного предположения мы получили верное равенство.
+    }
+    \item Формула умножения двух событий: при \(P(B) > 0, P(A) > 0\): \[P(AB) = P(B) \cdot P(A/_B) = P(A) \cdot P(B/_A).\]
+    \pf{ Только при \(P(B) > 0, P(A) > 0\):
+    
+        Из определения \(P(A/_B) = \dfrac{P(AB)}{P(B)} \Rightarrow P(AB) = P(A/_B) \cdot P(B)\).
+        
+        Из определения \(P(B/_A) = \dfrac{P(AB)}{P(A)} \Rightarrow P(AB) = P(B/_A) \cdot P(A)\).
+
+        Тогда
+        \begin{cases}
+            \(P(AB) = P(A/_B) \cdot P(B)\) \\
+            \(P(AB) = P(B/_A) \cdot P(A)\)
+        \end{cases} \Rightarrow \(P(AB) = P(A/_B) \cdot P(B) = P(B/_A) \cdot P(A)\).
+    }
+    \item Формула умножения n событий: ] \(A_1, A_2, \dotsc, A_n. \ P(A_1 \cdot \dotsc \cdot A_{n-1}) > 0\), любое подмножество тоже > 0. Тогда \[P(A_1 \cdot \dotsc \cdot A_n) = P(A_1) \cdot P(A_2/_{A_1}) \cdot P(A_3/_{A_1 A_2}) \cdot \dotsc \cdot P(A_n/_{A_1 \dotsc A_{n-1}}).\]
+    \pf{ По индукции:
+    
+        n = 2: По свойству 10^\circ: \(P(A_1 A_2) = P(A_1) \cdot P(A_2/_{A_1})\).
+
+        n = k: \(P(A_1 \cdot \dotsc \cdot A_k) = P(A_1) \cdot P(A_2/_{A_1}) \cdot P(A_3/_{A_1 A_2}) \cdot \dotsc \cdot P(A_k/_{A_1 \dotsc A_{k-1}})\).
+
+        n = k+1: Обозначим \(C = A_1 \cdot \dotsc \cdot A_k\). Тогда \(A_1 \cdot \dotsc \cdot A_{k+1} = C \cdot A_{k+1}\). 
+        
+        Вычислим вероятность: по свойству 10^\circ \(P(C A_{k+1}) = P(C) \cdot P(A_{k+1}/_C)\).
+
+        А теперь обратная замена: \(P(A_1 \dotsc A_{k+1}) = P(A_1 \cdot \dotsc \cdot A_k) = P(A_1) \cdot P(A_2/_{A_1}) \cdot P(A_3/_{A_1 A_2}) \cdot \dotsc \cdot P(A_k/_{A_1 \dotsc A_{k-1}}) \cdot P(A_{k+1}/_{A_1 \dotsc A_k})\).
+    }
+    \item Формула полной вероятности
+    \defn{Полная группа событий}{
+        Попарно несовместные события, сумма которых равна достоверному событию.
+    }
+    \defn{Гипотеза}{
+    Одно из несовместных событий, образующих полную группу, наступление которого заранее не известно.
+    }
+    ] \(H_1, \dotsc, H_n \ -\) полная группа событий, A - событие,. \(\forall H_i: P(H_i) > 0 \ -\) гипотезы, вероятность А:
+    \[P(A) = P(H_1) \cdot P(A/_{H_1}) + \dotsc + P(H_n) \cdot P(A/_{H_n})\]
+    \pf{
+    ] A - событие, тогда \(A = A \cdot H_1 + A \cdot H_2 + \dotsc + A \cdot H_n = \overset{n}{\underset{i = 1}{\sum}}A H_i\). А вероятность \(P(A) = P(\overset{n}{\underset{i = 1}{\sum}}A H_i)\). По \(10^\circ\) формуле умножения вероятностей \textit{(и что вероятность суммы - это сумма вероятностей)} \(P(A) = \overset{n}{\underset{i = 1}{\sum}}P(H_i) \cdot P(A/_{H_i})\).
+    }
+    \item Формула Байеса: 
+    \rmk{Переоценим вероятности гипотез после того, как становится известным результат испытания, в итоге которого появилось событие А.}
+    
+    \(\overset{n}{\underset{i = 1}{\bigcup}}H_i -\) гипотезы - несовместные события, образующие полную группу. Условная вероятность любой гипотезы \(H_k \ \forall k = \overline{1, \dotsc, n}\) может быть вычислена по формуле:
+    \[P(H_k/_A) = \dfrac{P(H_k) \cdot P(A/_{H_k})}{\overset{n}{\underset{i = 1}{\sum}}A H_i}\]
+    \pf{
+        По свойству \(10^\circ\) \(P(A H_k) = P(H_k) \cdot P(A/_{H_k}) = P(A) \cdot P(H_k/_A)\). 
+        
+        Отсюда \(P(A/_{H_k}) = \dfrac{P(H_k)P(H_k/_A)}{P(A)}\). Заменим P(A) по формуле полной вероятности на \(\overset{n}{\underset{i = 1}{\sum}}P(H_i) \cdot P(A/_{H_i})\) и получим исходную формулу: \(P(H_k/_A) = \dfrac{P(H_k) \cdot P(A/_{H_k})}{\overset{n}{\underset{i = 1}{\sum}}A H_i}\).
+    }
+\end{enumerate}
+
+\end{document}
